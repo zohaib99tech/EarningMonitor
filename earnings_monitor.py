@@ -1,4 +1,4 @@
-import yfinance as yf
+import yfinance as yf 
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
@@ -24,7 +24,7 @@ CHAT_ID = "7016991413"          # ← Replace with your chat ID
 
 WATCHLIST = {
     "NVDA", "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "META", "AVGO",
-    "TSLA", "AMD", "MU", "INTC", "ZBRA",
+    "TSLA", "AMD", "MU", "INTC", "SPCX", "ZBRA",
     # Add more if needed
 }
 
