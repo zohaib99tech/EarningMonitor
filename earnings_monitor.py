@@ -24,7 +24,7 @@ CHAT_ID = "7016991413"          # ← Replace with your chat ID
 
 WATCHLIST = {
     "NVDA", "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "META", "AVGO",
-    "TSLA", "AMD", "MU", "INTC", "SPCX", "ZBRA",
+    "TSLA", "AMD", "MU", "INTC", "SPCX", "AXP", "VZ", "MCBS","ZBRA",
     # Add more if needed
 }
 
