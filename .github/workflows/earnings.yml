@@ -1,18 +1,46 @@
+# name: Earnings Monitor
+# on:
+#   schedule:
+#     - cron: '0 7 * * *'   # every day at 07:00 UTC (change as needed)
+#   workflow_dispatch:      # also allow manual runs
+# jobs:
+#   run:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: actions/setup-python@v5
+#         with:
+#           python-version: '3.12'
+#       - run: pip install -r requirements.txt
+#       - run: python earnings_monitor.py
+#         env:
+#           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+#           CHAT_ID: ${{ secrets.CHAT_ID }}
+
 name: Earnings Monitor
+
 on:
+  push:
+    branches: [ main ]          # ← triggers on every push to main
   schedule:
-    - cron: '0 7 * * *'   # every day at 07:00 UTC (change as needed)
-  workflow_dispatch:      # also allow manual runs
+    - cron: '0 7 * * *'         # daily at 07:00 UTC
+  workflow_dispatch:            # manual button in Actions tab
+
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install -r requirements.txt
-      - run: python earnings_monitor.py
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run earnings script
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python earnings_monitor.py
