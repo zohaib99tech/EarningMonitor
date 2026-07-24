@@ -24,11 +24,12 @@ CHAT_ID = "7016991413"          # ← Replace with your chat ID
 
 WATCHLIST = {
     "NVDA", "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "META", "AVGO",
-    "TSLA", "AMD", "MU", "INTC", "SPCX", "AXP", "VZ", "MCBS","ZBRA",
+    "TSLA", "AMD", "MU", "INTC", "SPCX", "SNDK", "COIN",
+    "PYPL", "HOOD", "MSTR", "RBLX", "MA", "RDDT",
     # Add more if needed
 }
 
-DAYS_AHEAD = 2                    # Check today + next X days
+DAYS_AHEAD = 10                    # Check today + next X days
 CHECK_INTERVAL_SECONDS = None     # Set to 1800 for loop mode, or use cron
 ALERTED_FILE = "alerted_earnings.json"
 # ============================================
