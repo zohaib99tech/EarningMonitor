@@ -99,7 +99,7 @@ def check_earnings():
 
                 est_str = f"${est_eps:.2f}" if pd.notna(est_eps) else "N/A"
                 reported_str = f"${reported_eps:.2f}" if pd.notna(reported_eps) else "N/A (upcoming)"
-                mcap_str = f"{mcap}" if pd.notna(mcap) else "N/A"
+                mcap_str = f"{mcap}" 
 
                 msg = (
                     f"🚨 <b>EARNINGS ALERT</b> — {symbol}\n\n"
