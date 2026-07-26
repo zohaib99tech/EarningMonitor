@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 import json
 import os
 import time
+import humanize
 
 # ================== CONFIG ==================
 BOT_TOKEN = "8269432210:AAGga3ElOcWdNuXY8etV8EPPoOqpTd7PIxk"      # ← Replace with your Telegram bot token
@@ -74,7 +75,7 @@ def check_earnings():
         try:
             ticker = yf.Ticker(symbol)
             df = ticker.get_earnings_dates(limit=8)  # Get recent + upcoming
-
+            ticker_data = ticker.get_info()
             if df is None or df.empty:
                 continue
 
@@ -95,17 +96,18 @@ def check_earnings():
 
                 est_eps = row.get("EPS Estimate")
                 reported_eps = row.get("Reported EPS")
-                mcap = row.get("Market Cap")
+                # mcap = row.get("Market Cap")
+                mcap = ticker_data.get("marketCap")
 
                 est_str = f"${est_eps:.2f}" if pd.notna(est_eps) else "N/A"
                 reported_str = f"${reported_eps:.2f}" if pd.notna(reported_eps) else "N/A (upcoming)"
-                mcap_str = f"{mcap}" 
+                mcap_str = f"${humanize.intword(mcap)}" if pd.notna(mcap) else "N/A"
 
                 msg = (
                     f"🚨 <b>EARNINGS ALERT</b> — {symbol}\n\n"
                     f"<b>Date:</b> {date.date()}\n"
                     f"<b>Estimate EPS:</b> {est_str}\n"
-                    f"<b>Previous/Reported EPS:</b> {reported_str}\n"
+                    f"<b>Reported EPS:</b> {reported_str}\n"
                     f"<b>Market Cap:</b> {mcap_str}\n"
                 )
 
