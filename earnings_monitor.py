@@ -98,10 +98,26 @@ def check_earnings():
                 reported_eps = row.get("Reported EPS")
                 # mcap = row.get("Market Cap")
                 mcap = ticker_data.get("marketCap")
+                trailPE = ticker_data.get("trailingPE")
+                forwardPE = ticker_data.get("forwardPE")
+                floatShares = ticker_data.get("floatShares")
+                trailEPS = ticker_data.get("trailingEps")
+                forwardEPS = ticker_data.get("forwardEps")
+                shortRatio = ticker_data.get("shortRatio")
+                cashflow = ticker_data.get("freeCashflow")
+
 
                 est_str = f"${est_eps:.2f}" if pd.notna(est_eps) else "N/A"
                 reported_str = f"${reported_eps:.2f}" if pd.notna(reported_eps) else "N/A (upcoming)"
                 mcap_str = f"${humanize.intword(mcap)}" if pd.notna(mcap) else "N/A"
+                trailPE_str = f"{trailPE:.2f}" if pd.notna(trailPE) else "N/A"
+                forwardPE_str = f"{forwardPE:.2f}" if pd.notna(forwardPE) else "N/A"
+                trailEPS_str = f"{trailEPS:.2f}" if pd.notna(trailEPS) else "N/A"
+                forwardEPS_str = f"{forwardEPS:.2f}" if pd.notna(forwardEPS) else "N/A"
+                shortRatio_str = f"{shortRatio:.2f}" if pd.notna(shortRatio) else "N/A"
+                floatShares_str = f"${humanize.intword(floatShares)}" if pd.notna(floatShares) else "N/A"
+                cashflow_str = f"${humanize.intword(cashflow)}" if pd.notna(cashflow) else "N/A"
+
 
                 msg = (
                     f"🚨 <b>EARNINGS ALERT</b> — {symbol}\n\n"
@@ -109,6 +125,14 @@ def check_earnings():
                     f"<b>Estimate EPS:</b> {est_str}\n"
                     f"<b>Reported EPS:</b> {reported_str}\n"
                     f"<b>Market Cap:</b> {mcap_str}\n"
+                    f"<b>Trailing PE:</b> {trailPE_str}\n"
+                    f"<b>Forward PE:</b> {forwardPE_str}\n"
+                    f"<b>Trailing EPS:</b> {trailEPS_str}\n"
+                    f"<b>Forward EPS:</b> {forwardEPS_str}\n"
+                    f"<b>Short Ratio:</b> {shortRatio_str}\n"
+                    f"<b>Float Shares:</b> {floatShares_str}\n"
+                    f"<b>Cashflow:</b> {cashflow_str}\n"
+                    
                 )
 
                 if pd.notna(row.get("Surprise(%)")):
