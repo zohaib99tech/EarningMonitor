@@ -96,7 +96,8 @@ def check_earnings():
 
                 est_eps = row.get("EPS Estimate")
                 reported_eps = row.get("Reported EPS")
-                # mcap = row.get("Market Cap")
+                surprize = row.get("Surprise(%)")
+
                 mcap = ticker_data.get("marketCap")
                 trailPE = ticker_data.get("trailingPE")
                 forwardPE = ticker_data.get("forwardPE")
@@ -109,6 +110,8 @@ def check_earnings():
 
                 est_str = f"${est_eps:.2f}" if pd.notna(est_eps) else "N/A"
                 reported_str = f"${reported_eps:.2f}" if pd.notna(reported_eps) else "N/A (upcoming)"
+                surprize_str = f"{surprize:.1f}%" if pd.notna(surprize) else "N/A"
+
                 mcap_str = f"${humanize.intword(mcap)}" if pd.notna(mcap) else "N/A"
                 trailPE_str = f"{trailPE:.2f}" if pd.notna(trailPE) else "N/A"
                 forwardPE_str = f"{forwardPE:.2f}" if pd.notna(forwardPE) else "N/A"
@@ -124,6 +127,9 @@ def check_earnings():
                     f"<b>Date:</b> {date.date()}\n"
                     f"<b>Estimate EPS:</b> {est_str}\n"
                     f"<b>Reported EPS:</b> {reported_str}\n"
+                    f"<b>Surprize:</b> {surprize_str}\n"
+
+                    f"🚨 <b>FINANCIAL ALERT</b> — {symbol}\n\n"
                     f"<b>Market Cap:</b> {mcap_str}\n"
                     f"<b>Trailing PE:</b> {trailPE_str}\n"
                     f"<b>Forward PE:</b> {forwardPE_str}\n"
@@ -135,8 +141,8 @@ def check_earnings():
                     
                 )
 
-                if pd.notna(row.get("Surprise(%)")):
-                    msg += f"<b>Surprise:</b> {row['Surprise(%)']:.1f}%\n"
+                # if pd.notna(row.get("Surprise(%)")):
+                #     msg += f"<b>Surprise:</b> {row['Surprise(%)']:.1f}%\n"
 
                 msg += "\n<i>Data from Yahoo Finance (similar to TradingView)</i>"
 
