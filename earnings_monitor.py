@@ -80,7 +80,7 @@ def check_earnings():
                 continue
 
             # Filter for earnings in the next DAYS_AHEAD days
-            start_date = today
+            start_date = today - timedelta(days=1)
             end_date = today + timedelta(days=DAYS_AHEAD)
 
             mask = (df.index.date >= start_date) & (df.index.date <= end_date)
@@ -127,14 +127,14 @@ def check_earnings():
                     f"<b>Date:</b> {date.date()}\n"
                     f"<b>Estimate EPS:</b> {est_str}\n"
                     f"<b>Reported EPS:</b> {reported_str}\n"
-                    f"<b>Surprize:</b> {surprize_str}\n"
+                    f"<b>Surprize:</b> {surprize_str}\n\n"
 
                     f"🚨 <b>FINANCIAL ALERT</b> — {symbol}\n\n"
                     f"<b>Market Cap:</b> {mcap_str}\n"
                     f"<b>Trailing PE:</b> {trailPE_str}\n"
-                    f"<b>Forward PE:</b> {forwardPE_str}\n"
+                    f"<b>Forward PE:</b> {forwardPE_str}\n\n"
                     f"<b>Trailing EPS:</b> {trailEPS_str}\n"
-                    f"<b>Forward EPS:</b> {forwardEPS_str}\n"
+                    f"<b>Forward EPS:</b> {forwardEPS_str}\n\n"
                     f"<b>Short Ratio:</b> {shortRatio_str}\n"
                     f"<b>Float Shares:</b> {floatShares_str}\n"
                     f"<b>Cashflow:</b> {cashflow_str}\n"
