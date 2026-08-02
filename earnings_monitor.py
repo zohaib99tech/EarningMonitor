@@ -24,7 +24,7 @@ CHAT_ID = "7016991413"          # ← Replace with your chat ID
 # }
 
 WATCHLIST = {
-    "NVDA", "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "META", "AVGO",
+    "NVDA", "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "META", "AVGO", "TSM"
     "TSLA", "AMD", "MU", "INTC", "SPCX", "SNDK", "COIN", "DELL",
     "PYPL", "HOOD", "MSTR", "RBLX", "WDC", "PLTR", "ASML", "QCOM",
     # Add more if needed
@@ -144,7 +144,7 @@ def check_earnings():
                 # if pd.notna(row.get("Surprise(%)")):
                 #     msg += f"<b>Surprise:</b> {row['Surprise(%)']:.1f}%\n"
 
-                msg += "\n<i>Data from Yahoo Finance (similar to TradingView)</i>"
+                # msg += "\n<i>Data from Yahoo Finance (similar to TradingView)</i>"
 
                 send_telegram(msg)
                 print(f"✅ Alert sent for {symbol} on {date.date()}")
