@@ -6,10 +6,9 @@ import json
 import os
 import time
 import humanize
+from dotenv import load_dotenv
 
 # ================== CONFIG ==================
-BOT_TOKEN = "8269432210:AAGga3ElOcWdNuXY8etV8EPPoOqpTd7PIxk"      # ← Replace with your Telegram bot token
-CHAT_ID = "7016991413"          # ← Replace with your chat ID
 
 # Your tech watchlist (S&P 500 IT + Nasdaq 100 tech companies)
 # WATCHLIST = {
@@ -24,9 +23,9 @@ CHAT_ID = "7016991413"          # ← Replace with your chat ID
 # }
 
 WATCHLIST = {
-    "NVDA", "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "META", "AVGO", "TSM"
-    "TSLA", "AMD", "MU", "INTC", "SPCX", "SNDK", "COIN", "DELL",
-    "PYPL", "HOOD", "MSTR", "RBLX", "WDC", "PLTR", "ASML", "QCOM",
+    "NVDA", "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "META", "AVGO", "TSM",
+    "TSLA", "AMD", "MU", "INTC", "SPCX", "SNDK", "COIN", "DELL", "CRWV",
+    "PYPL", "HOOD", "MSTR", "RBLX", "WDC", "PLTR", "ASML", "QCOM", "WMT", "BABA",
     # Add more if needed
 }
 
@@ -80,7 +79,7 @@ def check_earnings():
                 continue
 
             # Filter for earnings in the next DAYS_AHEAD days
-            start_date = today - timedelta(days=1)
+            start_date = today - timedelta(days=3)
             end_date = today + timedelta(days=DAYS_AHEAD)
 
             mask = (df.index.date >= start_date) & (df.index.date <= end_date)
@@ -118,7 +117,7 @@ def check_earnings():
                 trailEPS_str = f"{trailEPS:.2f}" if pd.notna(trailEPS) else "N/A"
                 forwardEPS_str = f"{forwardEPS:.2f}" if pd.notna(forwardEPS) else "N/A"
                 shortRatio_str = f"{shortRatio:.2f}" if pd.notna(shortRatio) else "N/A"
-                floatShares_str = f"${humanize.intword(floatShares)}" if pd.notna(floatShares) else "N/A"
+                floatShares_str = f"{humanize.intword(floatShares)}" if pd.notna(floatShares) else "N/A"
                 cashflow_str = f"${humanize.intword(cashflow)}" if pd.notna(cashflow) else "N/A"
 
 
@@ -161,6 +160,10 @@ def check_earnings():
 if __name__ == "__main__":
     print("=== Earnings Monitor Started (yfinance) ===")
     print(f"Monitoring {len(WATCHLIST)} tech companies")
+
+    load_dotenv()
+    BOT_TOKEN = os.getenv("BOT_TOKEN")
+    CHAT_ID = os.getenv("CHAT_ID")
 
     if CHECK_INTERVAL_SECONDS:
         while True:
