@@ -36,16 +36,30 @@ ALERTED_FILE = "alerted_earnings.json"
 
 
 def send_telegram(message: str):
+
+    if not BOT_TOKEN or not CHAT_ID:
+        print("❌ BOT_TOKEN or CHAT_ID is missing – cannot send Telegram message")
+        return
+
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     payload = {
         "chat_id": CHAT_ID,
         "text": message,
         "parse_mode": "HTML"
     }
+    # try:
+    #     requests.post(url, json=payload, timeout=10)
+    # except Exception as e:
+    #     print(f"Telegram error: {e}")
+
     try:
-        requests.post(url, json=payload, timeout=10)
+        r = requests.post(url, json=payload, timeout=15)
+        if r.status_code == 200:
+            print("✅ Telegram message sent successfully")
+        else:
+            print(f"❌ Telegram API error {r.status_code}: {r.text}")
     except Exception as e:
-        print(f"Telegram error: {e}")
+        print(f"❌ Telegram exception: {e}")
 
 
 def load_alerted():
@@ -162,8 +176,16 @@ if __name__ == "__main__":
     print(f"Monitoring {len(WATCHLIST)} tech companies")
 
     load_dotenv(override=True)
+    global BOT_TOKEN, CHAT_ID
     BOT_TOKEN = os.getenv("BOT_TOKEN")
     CHAT_ID = os.getenv("CHAT_ID")
+
+    print(f"BOT_TOKEN loaded: {bool(BOT_TOKEN)}")
+    print(f"CHAT_ID loaded: {bool(CHAT_ID)}")
+
+    if not BOT_TOKEN or not CHAT_ID:
+        print("❌ Secrets missing! Aborting.")
+        exit(1)
 
     if CHECK_INTERVAL_SECONDS:
         while True:
