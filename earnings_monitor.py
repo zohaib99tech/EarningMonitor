@@ -161,7 +161,7 @@ if __name__ == "__main__":
     print("=== Earnings Monitor Started (yfinance) ===")
     print(f"Monitoring {len(WATCHLIST)} tech companies")
 
-    load_dotenv()
+    load_dotenv(override=True)
     BOT_TOKEN = os.getenv("BOT_TOKEN")
     CHAT_ID = os.getenv("CHAT_ID")
 
