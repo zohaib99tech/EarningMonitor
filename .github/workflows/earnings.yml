@@ -29,6 +29,7 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    environment: secrets
     steps:
       - uses: actions/checkout@v4
 

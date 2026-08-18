@@ -177,11 +177,8 @@ if __name__ == "__main__":
 
     load_dotenv(override=True)
     global BOT_TOKEN, CHAT_ID
-    # BOT_TOKEN = os.getenv("BOT_TOKEN")
-    # CHAT_ID = os.getenv("CHAT_ID")
-
-    BOT_TOKEN = os.getenv("secrets.BOT_TOKEN")
-    CHAT_ID = os.getenv("secrets.CHAT_ID")
+    BOT_TOKEN = os.getenv("BOT_TOKEN")
+    CHAT_ID = os.getenv("CHAT_ID")
 
     print(f"BOT_TOKEN loaded: {bool(BOT_TOKEN)}")
     print(f"CHAT_ID loaded: {bool(CHAT_ID)}")
